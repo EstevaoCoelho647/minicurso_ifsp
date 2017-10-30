@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewNoteTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Note Title" />
+
+    <TextView
+        android:id="@+id/textViewNoteBody"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="body body body body body body body bodybody
+         body bodybody body body body body body body " />
+
+</LinearLayout>
