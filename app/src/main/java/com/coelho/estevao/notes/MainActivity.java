@@ -23,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
         final ArrayList<Note> notes = new ArrayList<>();
-        notes.add(new Note("title1", "body"));
-        notes.add(new Note("title2", "body"));
-        notes.add(new Note("title3", "body"));
-        notes.add(new Note("title4", "body"));
+        final Note note = new Note("noteeeeeee", "booooooody");
+        final NoteDAO noteDAO = new NoteDAO();
 
         final NoteAdapter noteAdapter = new NoteAdapter(notes);
         recyclerView.setAdapter(noteAdapter);
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notes.add(new Note("noteeeeeee", "booooooody"));
+                noteDAO.insert(note);
                 noteAdapter.notifyDataSetChanged();
 //                Intent goToNoteActivity = new Intent(MainActivity.this, NoteActivity.class);
 //                startActivity(goToNoteActivity);
