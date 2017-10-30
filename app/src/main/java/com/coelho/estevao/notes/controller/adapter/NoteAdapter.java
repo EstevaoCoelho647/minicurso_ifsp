@@ -1,5 +1,6 @@
 package com.coelho.estevao.notes.controller.adapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.TextView;
 import com.coelho.estevao.notes.R;
 import com.coelho.estevao.notes.model.entity.Note;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by estevao on 30/10/17.
@@ -19,8 +22,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
 
     private List<Note> noteList;
 
-    public NoteAdapter(List<Note> noteList) {
-        this.noteList = noteList;
+    public NoteAdapter() {
+        this.noteList = new ArrayList<>();
     }
 
     @Override
@@ -35,6 +38,23 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
 
         holder.textViewNoteBody.setText(note.getNoteContent());
         holder.textViewNoteTitle.setText(note.getTitle());
+
+        String[] allColors = holder.itemView.getContext().getResources().getStringArray(R.array.card_colors);
+        Random ran = new Random();
+        String colorString = allColors[ran.nextInt(5)];
+
+        holder.linearLayout.setBackgroundColor(Color.parseColor(colorString));
+    }
+
+
+    public List<Note> getNoteList() {
+        return noteList;
+    }
+
+    public void setNoteList(List<Note> noteList) {
+        this.noteList.clear();
+        this.noteList.addAll(noteList);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -43,6 +63,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        View linearLayout;
         TextView textViewNoteTitle;
         TextView textViewNoteBody;
 
@@ -50,6 +71,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
             super(itemView);
             textViewNoteTitle = itemView.findViewById(R.id.textViewNoteTitle);
             textViewNoteBody = itemView.findViewById(R.id.textViewNoteBody);
+            linearLayout = itemView.findViewById(R.id.linearLayout);
 
         }
     }

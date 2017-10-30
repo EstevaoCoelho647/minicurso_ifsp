@@ -3,4 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="cardRed">#C62828</color>
+    <color name="cardBlue">#0288D1</color>
+    <color name="cardYellow">#FBC02D</color>
+    <color name="cardGrey">#9E9E9E</color>
+    <color name="cardCyan">#00BCD4</color>
+    <color name="cardTeal">#1DE9B6</color>
+
 </resources>

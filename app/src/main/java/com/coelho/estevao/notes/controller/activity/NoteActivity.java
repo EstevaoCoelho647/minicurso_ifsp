@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.coelho.estevao.notes.R;
 import com.coelho.estevao.notes.model.entity.Note;
+import com.coelho.estevao.notes.model.persistence.NoteDAO;
 
 /**
  * Created by estevao on 30/10/17.
@@ -43,8 +44,9 @@ public class NoteActivity extends AppCompatActivity {
             note.setTitle(editTextTitle.getText().toString());
             note.setNoteContent(editTextNote.getText().toString());
 
-
+            new NoteDAO().insert(note);
             Toast.makeText(this, note.getTitle() + " saved", Toast.LENGTH_SHORT).show();
+
             finish();
             return true;
         }
