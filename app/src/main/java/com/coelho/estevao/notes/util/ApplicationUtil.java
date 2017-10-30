@@ -1,4 +1,6 @@
-package com.coelho.estevao.notes;
+package com.coelho.estevao.notes.util;
+
+import com.coelho.estevao.notes.NotesApplication;
 
 /**
  * Created by estevao on 30/10/17.

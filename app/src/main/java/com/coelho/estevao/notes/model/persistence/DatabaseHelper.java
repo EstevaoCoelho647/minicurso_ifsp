@@ -1,8 +1,10 @@
-package com.coelho.estevao.notes;
+package com.coelho.estevao.notes.model.persistence;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.coelho.estevao.notes.util.ApplicationUtil;
 
 /**
  * Created by estevao on 30/10/17.

@@ -1,4 +1,4 @@
-package com.coelho.estevao.notes;
+package com.coelho.estevao.notes.model.entity;
 
 /**
  * Created by estevao on 30/10/17.

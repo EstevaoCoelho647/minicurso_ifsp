@@ -2,6 +2,8 @@ package com.coelho.estevao.notes;
 
 import android.app.Application;
 
+import com.coelho.estevao.notes.util.ApplicationUtil;
+
 /**
  * Created by estevao on 30/10/17.
  */

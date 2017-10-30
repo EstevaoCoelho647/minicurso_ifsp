@@ -1,10 +1,13 @@
-package com.coelho.estevao.notes;
+package com.coelho.estevao.notes.controller.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.coelho.estevao.notes.R;
+import com.coelho.estevao.notes.model.entity.Note;
 
 import java.util.List;
 
@@ -19,9 +22,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     public NoteAdapter(List<Note> noteList) {
         this.noteList = noteList;
     }
-
-
-
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -41,7 +41,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     public int getItemCount() {
         return noteList.size();
     }
-
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNoteTitle;

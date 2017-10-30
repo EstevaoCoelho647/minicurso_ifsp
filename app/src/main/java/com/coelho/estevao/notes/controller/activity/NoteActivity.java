@@ -1,4 +1,4 @@
-package com.coelho.estevao.notes;
+package com.coelho.estevao.notes.controller.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.coelho.estevao.notes.R;
+import com.coelho.estevao.notes.model.entity.Note;
 
 /**
  * Created by estevao on 30/10/17.

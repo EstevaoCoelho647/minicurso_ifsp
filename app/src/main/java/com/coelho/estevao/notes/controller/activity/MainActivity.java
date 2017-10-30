@@ -1,4 +1,4 @@
-package com.coelho.estevao.notes;
+package com.coelho.estevao.notes.controller.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,6 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.coelho.estevao.notes.controller.adapter.NoteAdapter;
+import com.coelho.estevao.notes.R;
+import com.coelho.estevao.notes.model.entity.Note;
+import com.coelho.estevao.notes.model.persistence.NoteDAO;
 
 import java.util.ArrayList;
 
@@ -22,11 +27,12 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
-        final ArrayList<Note> notes = new ArrayList<>();
         final Note note = new Note("noteeeeeee", "booooooody");
         final NoteDAO noteDAO = new NoteDAO();
 
-        final NoteAdapter noteAdapter = new NoteAdapter(notes);
+        final ArrayList<Note> allNotes = noteDAO.getAll();
+
+        final NoteAdapter noteAdapter = new NoteAdapter(allNotes);
         recyclerView.setAdapter(noteAdapter);
         noteAdapter.notifyDataSetChanged();
 
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 noteDAO.insert(note);
+                allNotes.add(note);
                 noteAdapter.notifyDataSetChanged();
 //                Intent goToNoteActivity = new Intent(MainActivity.this, NoteActivity.class);
 //                startActivity(goToNoteActivity);
