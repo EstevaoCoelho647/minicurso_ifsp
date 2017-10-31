@@ -3,7 +3,9 @@ package com.coelho.estevao.notes.controller.activity;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +17,6 @@ import com.coelho.estevao.notes.model.entity.Note;
 import com.coelho.estevao.notes.model.persistence.NoteDAO;
 import com.thebluealliance.spectrum.SpectrumDialog;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 import static com.coelho.estevao.notes.util.ApplicationUtil.getContext;
 
 /**
@@ -26,8 +26,10 @@ import static com.coelho.estevao.notes.util.ApplicationUtil.getContext;
 public class NoteActivity extends AppCompatActivity {
     EditText editTextNote;
     EditText editTextTitle;
-    CircleImageView circleImageView;
+    CardView circleImageView;
     String selectedColor = "0288D1";
+    CardView cardViewColor;
+    ConstraintLayout holder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +38,10 @@ public class NoteActivity extends AppCompatActivity {
 
         editTextNote = (EditText) findViewById(R.id.editTextNote);
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
-        circleImageView = (CircleImageView) findViewById(R.id.circleImageView);
+        circleImageView = (CardView) findViewById(R.id.circleImageView);
+        cardViewColor = (CardView) findViewById(R.id.cardViewColor);
+        holder = (ConstraintLayout) findViewById(R.id.holder);
+
 
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +54,8 @@ public class NoteActivity extends AppCompatActivity {
                             @Override
                             public void onColorSelected(boolean positiveResult, @ColorInt int color) {
                                 if (positiveResult) {
-                                    circleImageView.setColorFilter(color);
+                                    cardViewColor.setCardBackgroundColor(color);
+                                    holder.setBackgroundColor(color);
                                     selectedColor = Integer.toHexString(color).toUpperCase();
                                     Toast.makeText(getContext(), "Color selected: #" + selectedColor, Toast.LENGTH_SHORT).show();
                                 } else {

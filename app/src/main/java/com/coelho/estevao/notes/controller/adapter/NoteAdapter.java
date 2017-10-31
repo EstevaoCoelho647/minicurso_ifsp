@@ -1,6 +1,7 @@
 package com.coelho.estevao.notes.controller.adapter;
 
 import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         holder.textViewNoteBody.setText(note.getNoteContent());
         holder.textViewNoteTitle.setText(note.getTitle());
 
-        holder.linearLayout.setBackgroundColor(Color.parseColor(note.getColor()));
+        holder.linearLayout.setCardBackgroundColor(Color.parseColor(note.getColor()));
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -66,7 +67,7 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        View linearLayout;
+        CardView linearLayout;
         TextView textViewNoteTitle;
         TextView textViewNoteBody;
 
