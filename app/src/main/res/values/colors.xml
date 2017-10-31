@@ -11,4 +11,13 @@
     <color name="cardCyan">#00BCD4</color>
     <color name="cardTeal">#1DE9B6</color>
 
+    <array name="card_colors">
+        <item>@color/cardRed</item>
+        <item>@color/cardBlue</item>
+        <item>@color/cardYellow</item>
+        <item>@color/cardGrey</item>
+        <item>@color/cardCyan</item>
+        <item>@color/cardTeal</item>
+    </array>
+
 </resources>

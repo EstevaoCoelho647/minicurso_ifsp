@@ -36,12 +36,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private String getCreateTableScript() {
         final StringBuilder create = new StringBuilder();
-
         create.append(" CREATE TABLE notes");
         create.append(" ( ");
         create.append("id INTEGER PRIMARY KEY, ");
         create.append("title TEXT, ");
-        create.append("body TEXT ");
+        create.append("body TEXT, ");
+        create.append("color TEXT ");
         create.append(" ); ");
         return create.toString();
     }

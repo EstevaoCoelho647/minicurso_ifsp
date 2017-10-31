@@ -8,6 +8,7 @@ public class Note {
     private Long id;
     private String title;
     private String noteContent;
+    private String color;
 
     public Note(String title, String note) {
         this.title = title;
@@ -16,6 +17,14 @@ public class Note {
 
     public Note() {
 
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getColor() {
+        return color;
     }
 
     public Long getId() {

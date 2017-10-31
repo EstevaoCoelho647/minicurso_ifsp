@@ -41,7 +41,7 @@ public class NoteDAO {
         //get All notes from database
         DatabaseHelper instance = DatabaseHelper.getInstance();
         SQLiteDatabase db = instance.getReadableDatabase();
-        String[] columns = {"id", "title", "body"};
+        String[] columns = {"id", "title", "body", "color"};
         //params: table name, columns, selection, selectionArgs, groupBy, having, orderBy
         Cursor cursor = db.query("notes", columns, null, null, null, null, "id");
 
@@ -52,6 +52,7 @@ public class NoteDAO {
                 note.setId(cursor.getLong(cursor.getColumnIndex("id")));
                 note.setTitle(cursor.getString(cursor.getColumnIndex("title")));
                 note.setNoteContent(cursor.getString(cursor.getColumnIndex("body")));
+                note.setColor(cursor.getString(cursor.getColumnIndex("color")));
             }
             notes.add(note);
         }
@@ -66,6 +67,7 @@ public class NoteDAO {
         values.put("id", note.getId());
         values.put("title", note.getTitle());
         values.put("body", note.getNoteContent());
+        values.put("color", note.getColor());
         return values;
     }
 }

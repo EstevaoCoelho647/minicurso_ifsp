@@ -12,7 +12,6 @@ import com.coelho.estevao.notes.model.entity.Note;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by estevao on 30/10/17.
@@ -39,11 +38,15 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         holder.textViewNoteBody.setText(note.getNoteContent());
         holder.textViewNoteTitle.setText(note.getTitle());
 
-        String[] allColors = holder.itemView.getContext().getResources().getStringArray(R.array.card_colors);
-        Random ran = new Random();
-        String colorString = allColors[ran.nextInt(5)];
+        holder.linearLayout.setBackgroundColor(Color.parseColor(note.getColor()));
 
-        holder.linearLayout.setBackgroundColor(Color.parseColor(colorString));
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                //Do your action here
+                return false;
+            }
+        });
     }
 
 
