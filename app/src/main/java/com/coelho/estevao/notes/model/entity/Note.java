@@ -1,10 +1,12 @@
 package com.coelho.estevao.notes.model.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by estevao on 30/10/17.
  */
 
-public class Note {
+public class Note implements Serializable {
     private Long id;
     private String title;
     private String noteContent;

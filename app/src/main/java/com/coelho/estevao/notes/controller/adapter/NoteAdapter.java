@@ -1,5 +1,7 @@
 package com.coelho.estevao.notes.controller.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.coelho.estevao.notes.R;
+import com.coelho.estevao.notes.controller.activity.NoteActivity;
 import com.coelho.estevao.notes.model.entity.Note;
+import com.coelho.estevao.notes.model.persistence.NoteDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +25,10 @@ import java.util.List;
 public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> {
 
     private List<Note> noteList;
+    private Context context;
 
-    public NoteAdapter() {
+    public NoteAdapter(Context context) {
+        this.context = context;
         this.noteList = new ArrayList<>();
     }
 
@@ -33,8 +39,8 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        Note note = noteList.get(position);
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
+        final Note note = noteList.get(position);
 
         holder.textViewNoteBody.setText(note.getNoteContent());
         holder.textViewNoteTitle.setText(note.getTitle());
@@ -44,8 +50,20 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                //Do your action here
+                NoteDAO noteDAO = new NoteDAO();
+                noteDAO.delete(note);
+                noteList.remove(note);
+                notifyDataSetChanged();
                 return false;
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToNoteActivity = new Intent(context, NoteActivity.class);
+                goToNoteActivity.putExtra("NOTE", note);
+                context.startActivity(goToNoteActivity);
             }
         });
     }
@@ -76,7 +94,6 @@ public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.MyViewHolder> 
             textViewNoteTitle = itemView.findViewById(R.id.textViewNoteTitle);
             textViewNoteBody = itemView.findViewById(R.id.textViewNoteBody);
             linearLayout = itemView.findViewById(R.id.linearLayout);
-
         }
     }
 }

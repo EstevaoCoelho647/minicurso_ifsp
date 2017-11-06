@@ -1,9 +1,11 @@
 package com.coelho.estevao.notes.controller.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.view.Menu;
@@ -27,28 +29,37 @@ public class NoteActivity extends AppCompatActivity {
     EditText editTextNote;
     EditText editTextTitle;
     CardView circleImageView;
-    String selectedColor = "0288D1";
+    int selectedColor;
     CardView cardViewColor;
     ConstraintLayout holder;
+    Note note;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
-
         editTextNote = (EditText) findViewById(R.id.editTextNote);
         editTextTitle = (EditText) findViewById(R.id.editTextTitle);
         circleImageView = (CardView) findViewById(R.id.circleImageView);
         cardViewColor = (CardView) findViewById(R.id.cardViewColor);
         holder = (ConstraintLayout) findViewById(R.id.holder);
 
+        selectedColor = ContextCompat.getColor(this, R.color.cardCyan);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            note = (Note) extras.get("NOTE");
+            bindParameters(note);
+        } else {
+            note = new Note();
+        }
 
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new SpectrumDialog.Builder(getContext())
+                new SpectrumDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_Alert)
                         .setColors(R.array.card_colors)
-                        .setSelectedColorRes(R.color.cardBlue)
+                        .setSelectedColor(selectedColor)
                         .setDismissOnColorSelected(false)
                         .setOnColorSelectedListener(new SpectrumDialog.OnColorSelectedListener() {
                             @Override
@@ -56,15 +67,20 @@ public class NoteActivity extends AppCompatActivity {
                                 if (positiveResult) {
                                     cardViewColor.setCardBackgroundColor(color);
                                     holder.setBackgroundColor(color);
-                                    selectedColor = Integer.toHexString(color).toUpperCase();
-                                    Toast.makeText(getContext(), "Color selected: #" + selectedColor, Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getContext(), "Dialog cancelled", Toast.LENGTH_SHORT).show();
+                                    selectedColor = color;
                                 }
                             }
                         }).build().show(getSupportFragmentManager(), "dialog_demo_5");
             }
         });
+    }
+
+    private void bindParameters(Note note) {
+        editTextNote.setText(note.getNoteContent());
+        editTextTitle.setText(note.getTitle());
+        selectedColor = Color.parseColor(note.getColor());
+        cardViewColor.setCardBackgroundColor(selectedColor);
+        holder.setBackgroundColor(selectedColor);
     }
 
     @Override
@@ -78,14 +94,17 @@ public class NoteActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.action_save) {
-            Note note = new Note();
             note.setTitle(editTextTitle.getText().toString());
             note.setNoteContent(editTextNote.getText().toString());
-            note.setColor("#" + selectedColor);
+            note.setColor("#" + Integer.toHexString(selectedColor).toUpperCase());
 
-            new NoteDAO().insert(note);
-            Toast.makeText(this, note.getTitle() + " saved", Toast.LENGTH_SHORT).show();
-
+            if (note.getId() == null) {
+                new NoteDAO().insert(note);
+                Toast.makeText(this, note.getTitle() + " saved", Toast.LENGTH_SHORT).show();
+            } else {
+                new NoteDAO().update(note);
+                Toast.makeText(this, note.getTitle() + " updated", Toast.LENGTH_SHORT).show();
+            }
             finish();
             return true;
         }

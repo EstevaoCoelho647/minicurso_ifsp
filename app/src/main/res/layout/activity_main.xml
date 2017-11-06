@@ -27,7 +27,9 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appBarLayout" />
+        android:layout_below="@+id/appBarLayout"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp" />
 
 
     <android.support.design.widget.FloatingActionButton

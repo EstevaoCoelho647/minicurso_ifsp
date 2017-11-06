@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
 
 
-        noteAdapter = new NoteAdapter();
+        noteAdapter = new NoteAdapter(this);
         recyclerView.setAdapter(noteAdapter);
         noteAdapter.notifyDataSetChanged();
 

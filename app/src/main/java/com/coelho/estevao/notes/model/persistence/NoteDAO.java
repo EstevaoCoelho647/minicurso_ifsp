@@ -28,13 +28,31 @@ public class NoteDAO {
         Log.i("inserted", "last id " + id);
     }
 
-
+    //  Delete a note from database
     public void delete(Note note) {
-        //TODO: delete a note from database
+        DatabaseHelper instance = DatabaseHelper.getInstance();
+        SQLiteDatabase db = instance.getWritableDatabase();
+
+        String where = "id = ?";
+        String[] params = {String.valueOf(note.getId())};
+
+        db.delete("notes", where, params);
+
+        db.close();
+        instance.close();
     }
 
+    // Update a note from database
     public void update(Note note) {
-        //TODO: update a note from database
+        DatabaseHelper instance = DatabaseHelper.getInstance();
+        SQLiteDatabase db = instance.getWritableDatabase();
+
+        ContentValues values = getContentValues(note);
+
+        String where = "id = ?";
+        String[] params = {String.valueOf(note.getId())};
+
+        db.update("notes", values, where, params);
     }
 
     public ArrayList<Note> getAll() {
